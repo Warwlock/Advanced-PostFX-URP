@@ -24,7 +24,7 @@ Effects
 - Difference of Gaussians (Basic and Extended)
 - Basic Edge Detection
 - Object Outline based on object layer.
-- Advanced Tone Mapping (*Custom3D* - Shclick - Ward - Reinhard - ReinhardExtended - Hable - Uchimura - NarkowiczACES - HillACES)
+- Advanced Tone Mapping (**Custom3D** - Shclick - Ward - Reinhard - ReinhardExtended - Hable - Uchimura - NarkowiczACES - HillACES)
 
 
 References
