@@ -1,7 +1,7 @@
 {
   "name": "com.warwlock.advancedpostfxurp",
   "displayName": "Advanced PostFX for URP",
-  "version": "0.1a",
+  "version": "0.1.0",
   "unity": "6000.0",
   "unityRelease": "58f2",
   "description": "Advanced Post Processing effects for URP. Effects: \n Ground Truth Ambient Occlusion (GTAO) \n Auto-Exposure \n Difference of Gaussians (Basic - Extended) \n Object Outline \n Advanced Tone Mapping (Custom3D - Shclick - Ward - Reinhard - ReinhardExtended - Hable - Uchimura - NarkowiczACES - HillACES) \n Basic Edge Detection",
