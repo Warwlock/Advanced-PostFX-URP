@@ -132,7 +132,7 @@ public class AutoExposureRendererFeature : ScriptableRendererFeature
 
             BufferHandle bufferHandleRG = renderGraph.ImportBuffer(bufferData);
 
-            if (isFirstFrame)
+            /*if (isFirstFrame)
             {
                 using (var builder = renderGraph.AddRasterRenderPass<PassData>("Clear Auto Exposure", out var passData))
                 {
@@ -146,9 +146,7 @@ public class AutoExposureRendererFeature : ScriptableRendererFeature
                         context.cmd.ClearRenderTarget(true, true, new Color(customEffect.keyValue.value * 0.05f, 0f, 0f, 1f));
                     });
                 }
-
-                isFirstFrame = false;
-            }
+            }*/
 
 
             using (var builder = renderGraph.AddComputePass("LogHistogram", out LogHistogramPassData data))
@@ -169,14 +167,12 @@ public class AutoExposureRendererFeature : ScriptableRendererFeature
             //RenderGraphUtils.BlitMaterialParameters parameters = new(destination, source, m_BlitMaterial, 0);
             //renderGraph.AddBlitPass(parameters, m_PassName);
 
-            bool firstFrame = false;
-
             using (var builder = renderGraph.AddComputePass("AutoExposure", out AutoExposurePassData data))
             {
                 data.scaleOffsetRes = LogHistogram.GetHistogramScaleOffsetRes(cameraData);
                 data.computeShader = m_autoExposure;
                 data.settings = customEffect;
-                data.firstFrame = firstFrame;
+                data.firstFrame = isFirstFrame;
 
                 data.buffer = bufferHandleRG;
                 builder.UseBuffer(data.buffer, AccessFlags.Read);
@@ -190,9 +186,9 @@ public class AutoExposureRendererFeature : ScriptableRendererFeature
                 builder.SetRenderFunc((AutoExposurePassData data, ComputeGraphContext context) => ExecuteAutoExposurePass(data, context));
             }
 
-            if (firstFrame)
+            if (isFirstFrame)
             {
-                //renderGraph.AddCopyPass(m_AutoExposurePool_Handle0, m_AutoExposurePool_Handle1);
+                isFirstFrame = false;
             }
 
             m_BlitMaterial.SetFloat("_exposureCompenastion", customEffect.keyValue.value);

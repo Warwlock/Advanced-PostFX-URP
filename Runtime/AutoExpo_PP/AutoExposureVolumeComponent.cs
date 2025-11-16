@@ -22,21 +22,21 @@ public class AutoExposureVolumeComponent : VolumeComponent, IPostProcessComponen
         Fixed
     }
 
-    public BoolParameter isEnabled = new BoolParameter(true);
+    public BoolParameter enabled = new BoolParameter(true);
 
     [Header("Exposure")]
 
     [DisplayInfo(name = "Filtering (%)"), Tooltip("Filters the bright and dark parts of the histogram when computing the average luminance. This is to avoid very dark pixels and very bright pixels from contributing to the auto exposure. Unit is in percent.")]
-    public FloatRangeParameter filtering = new FloatRangeParameter(new Vector2(50f, 95f), 1f, 99f);
+    public FloatRangeParameter filtering = new FloatRangeParameter(new Vector2(30f, 95f), 1f, 99f);
 
     [DisplayInfo(name = "Minimum (EV)"), Tooltip("Minimum average luminance to consider for auto exposure. Unit is EV.")]
-    public ClampedFloatParameter minLuminance = new ClampedFloatParameter(0f, LogHistogram.rangeMin, LogHistogram.rangeMax);
+    public ClampedFloatParameter minLuminance = new ClampedFloatParameter(5f, LogHistogram.rangeMin, LogHistogram.rangeMax);
 
     [DisplayInfo(name = "Maximum (EV)"), Tooltip("Maximum average luminance to consider for auto exposure. Unit is EV.")]
-    public ClampedFloatParameter maxLuminance = new ClampedFloatParameter(0f, LogHistogram.rangeMin, LogHistogram.rangeMax);
+    public ClampedFloatParameter maxLuminance = new ClampedFloatParameter(-5f, LogHistogram.rangeMin, LogHistogram.rangeMax);
 
     [DisplayInfo(name = "Exposure Compensation"), Tooltip("Use this to scale the global exposure of the scene.")]
-    public MinFloatParameter keyValue = new MinFloatParameter(1f, 0f);
+    public MinFloatParameter keyValue = new MinFloatParameter(0.4f, 0f);
 
     [Header("Adaptation")]
 
@@ -51,6 +51,6 @@ public class AutoExposureVolumeComponent : VolumeComponent, IPostProcessComponen
 
     public bool IsActive()
     {
-        return isEnabled.overrideState;
+        return enabled.overrideState && enabled.value;
     }
 }

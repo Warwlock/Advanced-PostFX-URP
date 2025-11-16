@@ -20,6 +20,7 @@ Installation
 
 Effects
 ------------
+- Ground Truth Ambient Occlusion (GTAO)
 - Auto Exposure
 - Difference of Gaussians (Basic and Extended)
 - Basic Edge Detection
@@ -32,7 +33,7 @@ Documentation
 
 References
 ------------
-
 - [Acerola - Unity Post Processing Pipeline and Shaders](https://github.com/GarrettGunnell/Post-Processing)
 - [MaxwellGengYF - Unity Ground Truth Ambient Occlusion](https://github.com/MaxwellGengYF/Unity-Ground-Truth-Ambient-Occlusion)
 - [Unity Technologies - Auto Exposure from PostProcessing Stack V2](https://github.com/Unity-Technologies/PostProcessing)
+

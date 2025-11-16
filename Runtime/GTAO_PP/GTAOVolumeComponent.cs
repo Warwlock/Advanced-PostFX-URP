@@ -14,13 +14,14 @@ public class GTAOVolumeComponent : VolumeComponent, IPostProcessComponent
         BentNormal = 7
     };
 
+    public BoolParameter enabled = new BoolParameter(true);
 
     [Header("Render Property")]
     public ClampedIntParameter DirSampler = new ClampedIntParameter(2, 1, 4);
     public ClampedIntParameter SliceSampler = new ClampedIntParameter(2, 1, 8);
-    public ClampedFloatParameter Radius = new ClampedFloatParameter(2.5f, 1.0f, 5.0f);
+    public ClampedFloatParameter Radius = new ClampedFloatParameter(1f, 1.0f, 5.0f);
     public ClampedFloatParameter Intensity = new ClampedFloatParameter(1.0f, 0.0f, 1.0f);
-    public ClampedFloatParameter Power = new ClampedFloatParameter(2.5f, 1.0f, 8.0f);
+    public ClampedFloatParameter Power = new ClampedFloatParameter(1f, 1.0f, 8.0f);
     public BoolParameter MultiBounce = new BoolParameter(true);
 
     [Header("Filtter Property")]
@@ -30,10 +31,10 @@ public class GTAOVolumeComponent : VolumeComponent, IPostProcessComponent
 
     [Header("Debug")]
     public EnumParameter<OutPass> AODebug = new EnumParameter<OutPass>(OutPass.Combine);
-    public BoolParameter HideInSceneView = new BoolParameter(true);
+    public BoolParameter HideInSceneView = new BoolParameter(false);
 
     public bool IsActive()
     {
-        return Intensity.overrideState;
+        return enabled.overrideState && enabled.value;
     }
 }

@@ -23,7 +23,7 @@ public class ToneMappingVolumeComponent : VolumeComponent, IPostProcessComponent
         Custom
     }
 
-    public EnumParameter<Tonemappers> toneMapper = new EnumParameter<Tonemappers>(Tonemappers.RGBClamp);
+    public EnumParameter<Tonemappers> toneMapper = new EnumParameter<Tonemappers>(Tonemappers.Reinhard);
 
     // Tumblin Rushmeier Parameters
     [DisplayInfo(name = "Maximum Display Luminance")]
@@ -66,4 +66,5 @@ public class ToneMappingVolumeComponent : VolumeComponent, IPostProcessComponent
     {
         return enabled.overrideState && enabled.value;
     }
+  
 }

@@ -107,24 +107,27 @@ public class ToneMappingRendererFeature : ScriptableRendererFeature
 
                 if ((int)customEffect.toneMapper.value == 10)
                 {
-                    if (customEffect.lutTexture.value == null) return;
-                    // Create a render texture from the input texture
-                    RTHandle rtHandle = RTHandles.Alloc(customEffect.lutTexture.value);
+                    if (customEffect.lutTexture.value != null)
+                    {
+                        // Create a render texture from the input texture
+                        RTHandle rtHandle = RTHandles.Alloc(customEffect.lutTexture.value);
 
-                    // Create a texture handle that the render graph system can use
-                    TextureHandle textureToRead = renderGraph.ImportTexture(rtHandle);
+                        // Create a texture handle that the render graph system can use
+                        TextureHandle textureToRead = renderGraph.ImportTexture(rtHandle);
 
-                    // Add the texture to the pass data
-                    passData.lutTextureToRead = textureToRead;
+                        // Add the texture to the pass data
+                        passData.lutTextureToRead = textureToRead;
 
-                    // Set the texture as readable
-                    builder.UseTexture(passData.lutTextureToRead, AccessFlags.Read);
+                        // Set the texture as readable
+                        builder.UseTexture(passData.lutTextureToRead, AccessFlags.Read);
+                    }
                 }
 
                 builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
                 {
                     if ((int)customEffect.toneMapper.value == 10)
                     {
+                        if (customEffect.lutTexture.value == null) return;
                         int lutSize = customEffect.lutTexture.value.width;
                         m_BlitMaterial.SetVector("_LogLut3D_Params", new Vector4(1f / lutSize, lutSize - 1f, customEffect.postExposure.value, 1f));
                         m_BlitMaterial.SetTexture("_LogLut3D", data.lutTextureToRead);

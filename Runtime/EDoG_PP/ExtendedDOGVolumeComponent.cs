@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 [VolumeComponentMenu("Custom/ExtendedDifferenceOfGaussians")]
 public class ExtendedDOGVolumeComponent : VolumeComponent, IPostProcessComponent
 {
+    public BoolParameter enabled = new BoolParameter(true);
+
     public ClampedIntParameter superSample = new ClampedIntParameter(1, 1, 4);
 
     [Header("Edge Tangent Flow Settings")]
@@ -102,7 +104,7 @@ public class ExtendedDOGVolumeComponent : VolumeComponent, IPostProcessComponent
 
     public bool IsActive()
     {
-        return superSample.overrideState;
+        return enabled.overrideState && enabled.value;
     }
 
     public void UpdateMaterialVariables(Material dogMat)
